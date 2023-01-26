@@ -17,6 +17,10 @@ def mean_ssim(a, b, max_val=255.0):
 
 # Paper Review
 - Paper: [Scene text removal via cascaded text stroke detection and erasing](https://arxiv.org/pdf/2011.09768.pdf)
+- It is obvious that if we can extract the exact text stroke, which means that we can preserve original contents of input image as much as possible, and then we could achieve better result.
+- However, such precise areas are difficult to obtain, to best of our knowledge, there is no related research to focus on distinguishing text strokes from non-stroke area in the pixel-wise level.
+- In this paper, we propose a novel “end-to-end” framework based on generative adversarial network (GAN) to address this problem. The key idea of our approach is first to extract text strokes as accurately as possible, and then improve the text removal process.
+- We design a text stroke detection network (TSDNet), which can effectively distinguish text strokes from non-text area.
 - Specifically, we decouple the text removal problem into text stroke detection and stroke removal. We design a text stroke detection network and a text removal generation network to solve these two sub-problems separately.
   - The learning-based methods can be roughly classified into two main categories, i.e., text removal without/with using mask. The former simply takes the given image as input and removes all the texts from the whole input image. This kind of methods often left noticeable remnants of text or distort non-text area incorrectly, and cannot remove text locally. The latter usually uses a region mask, i.e., a rectangle or polygon mask roughly indicating the text region [e.g., Fig. 1(b)], as additional input to facilitate the text removal.
   - In other words, the mask used by MTRNet covers some unnecessary/redundant regions (i.e., non-stroke areas), especially when text strokes are scattered sparsely.
