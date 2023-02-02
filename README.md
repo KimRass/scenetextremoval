@@ -1,21 +1,6 @@
 - Github: https://github.com/wcq19941215/SceneTextRemoval
 
-# Metric
-## PSNR (Peak Signal-to-Noise Ratio)
-- `psnr = 10 * math.log10(r ** 2 / mse)`
-```python
-def mean_psnr(a, b, max_val=255.0):
-    psnr_value = tf.image.psnr(a, b, max_val)
-    return psnr_value, tf.reduce_mean(psnr_value)
-```
-## SSIM (Structural Similarity Index Map)
-```python
-def mean_ssim(a, b, max_val=255.0):
-    ssim_value = tf.image.ssim(a, b, max_val)
-    return ssim_value, tf.reduce_mean(ssim_value)
-```
-
-# Paper Review
+# Paper Summary
 - Paper: [Scene text removal via cascaded text stroke detection and erasing](https://arxiv.org/pdf/2011.09768.pdf)
 - It is obvious that if we can extract the exact text stroke, which means that we can preserve original contents of input image as much as possible, and then we could achieve better result.
 - However, such precise areas are difficult to obtain, to best of our knowledge, there is no related research to focus on distinguishing text strokes from non-stroke area in the pixel-wise level.
@@ -53,6 +38,5 @@ propagate information from non-text regions to text regions depending on pixel/p
 - An accurate text detector is often used for the former evaluation metric. As for a text-erased image, the cleaner text is erased, the fewer text will be detected. In this work, we use the state-of-the-art text detector CRAFT and use DetEval protocol for evaluation (i.e., recall, precision, and f-measure).
 - For the second evaluation metric, we adopt general image inpainting metrics, and mainly use the following three indicators: 1) mean absolute error (MAE); 2) peak signal-to-noise ratio (PSNR); and 3) the structural similarity index (SSIM).
 - FOR PSNR AND SSIM (in %), HIGHER IS BETTER; FOR MAE, R (RECALL), P (PRECISION), AND F (F-MEASURE), LOWER IS BETTER.
-
-# Comparison with Other Methods
+## Comparison with Other Methods
 - We quantitatively and qualitatively compare our method with state-of-the-art text removal methods: ST Eraser, EnsNet, and MTRNet, as well as recent image inpainting method: GatedConv.
